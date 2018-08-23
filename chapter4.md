@@ -1,12 +1,18 @@
 ---
-title       : Batch processing
-description : >-
-  Most shell commands will process many files at once.
-  This chapter will show you how to make your own pipelines do that.
-  Along the way, you will see how the shell uses variables to store information.
+title: 'Batch processing'
+description: 'Most shell commands will process many files at once. This chapter will show you how to make your own pipelines do that. Along the way, you will see how the shell uses variables to store information.'
+---
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:e4d5f4adea
 ## How does the shell store information?
+
+```yaml
+type: MultipleChoiceExercise 
+lang: shell
+xp: 50 
+skills: 1
+key: e4d5f4adea   
+```
+
 
 Like other programs, the shell stores information in variables.
 Some of these,
@@ -31,21 +37,39 @@ Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
 which determines how many old commands are stored in your command history.
 What is its value?
 
-*** =instructions
+
+`@instructions`
 - 10
 - 500
 - [2000]
 - The variable is not there.
 
-*** =hint
-
+`@hint`
 Use `set | grep HISTFILESIZE` to get the line you need.
 
-*** =pre_exercise_code
-```{python}
+`@pre_exercise_code`
+
+```{shell}
+
 ```
 
-*** =sct
+
+`@sample_code`
+
+```{shell}
+
+```
+
+
+`@solution`
+
+```{shell}
+
+```
+
+
+`@sct`
+
 ```{python}
 err1 = "No: the shell records more history than that."
 err2 = "No: the shell records more history than that."
@@ -54,8 +78,25 @@ err4 = "No: the variable `HISTFILESIZE` is there."
 Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:afae0f33a7
+
+`@possible_answers`
+
+
+`@feedback`
+
+
+---
+
 ## How can I print a variable's value?
+
+```yaml
+type: ConsoleExercise 
+lang: shell
+xp: 0 
+skills: 1
+key: afae0f33a7   
+```
+
 
 A simpler way to find a variable's value is to use a command called `echo`,
 which prints its arguments:
@@ -93,17 +134,37 @@ you must write `$X`.
 (This is so that the shell can tell whether you mean "a file named X"
 or "the value of a variable named X".)
 
-*** =instructions
 
+`@instructions`
 The variable `OSTYPE` holds the name of the kind of operating system you are using.
 Display its value using `echo`.
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+
+```{shell}
+
+```
+
+
+`@sample_code`
+
+```{shell}
+
+```
+
+
+`@solution`
+
 ```{shell}
 echo $OSTYPE
 ```
 
-*** =sct
+
+`@sct`
+
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
@@ -119,8 +180,23 @@ Ex().multi(
 Ex().success_msg("You're off to a good start. Let's carry on!")
 ```
 
---- type:BulletConsoleExercise key:e925da48e4
+
+`@possible_answers`
+
+
+`@feedback`
+
+
+---
+
 ## How else does the shell store information?
+
+```yaml
+type: BulletConsoleExercise 
+xp: 0 
+key: e925da48e4   
+```
+
 
 The other kind of variable is called a **shell variable**,
 which is like a local variable in a programming language.
@@ -143,98 +219,59 @@ echo $training
 seasonal/summer.csv
 ```
 
-*** =pre_exercise_code
-```{python}
-```
 
-*** =type1: ConsoleExercise
-*** =key1: 78f7fd446f
+`@instructions`
 
-*** =xp1: 10
 
-*** =instructions1
+`@hint`
 
-Define a variable called `testing` with the value `seasonal/winter.csv`.
 
-*** =hint1
+`@pre_exercise_code`
 
-There should *not* be spaces between the variable's name and its value.
-
-*** =sample_code1
 ```{shell}
+
 ```
 
-*** =solution1
+
+`@sample_code`
+
 ```{shell}
-testing=seasonal/winter.csv
+
 ```
 
-*** =sct1
-```{python}
-Ex().multi(
-    has_cwd('/home/repl'),
-    check_correct(
-        has_expr_output(
-            expr='echo $testing',
-            output='seasonal/winter.csv',
-            incorrect_msg="Have you used `testing=seasonal/winter.csv` to define the `testing` variable?"
-        ),
-        multi(
-            has_code("testing", incorrect_msg="You should use `testing` in your command."),
-            has_code("=", incorrect_msg="You should use the `=` sign in your command."),
-            has_code("seasonal/winter\.csv", incorrect_msg="You should use `seasonal/winter.csv` in your command.")
-        )
-    )
-)
-```
 
-*** =type2: ConsoleExercise
-*** =key2: d5e7224f55
+`@solution`
 
-*** =xp2: 10
-
-*** =instructions2
-
-Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
-using the value of the variable `testing` instead of the name of the file.
-
-*** =hint2
-
-
-Remember to use `$testing` rather than just `testing`
-(the `$` is needed to get the value of the variable).
-
-
-*** =sample_code2
 ```{shell}
+
 ```
 
-*** =solution2
+
+`@sct`
+
 ```{shell}
-# We need to re-set the variable for testing purposes for this exercise
-# you should only run "head -n 1 $testing"
-testing=seasonal/winter.csv
-head -n 1 $testing
+
 ```
 
-*** =sct2
-```{python}
-Ex().multi(
-    has_cwd('/home/repl'),
-    check_correct(
-        has_output('^Date,Tooth\s*$', incorrect_msg="Have you used `head -n 1 $testing`?"),
-        multi(
-            has_code('head', incorrect_msg="You should use `head` in your command."),
-            has_code('-n\s+1', incorrect_msg="You should use `-n 1` in your command."),
-            has_code('\$testing', incorrect_msg="you should use `$testing` in your command.")
-        )
-    )
-)
-Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
-```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:920d1887e3
+`@possible_answers`
+
+
+`@feedback`
+
+
+---
+
 ## How can I repeat a command many times?
+
+```yaml
+type: ConsoleExercise 
+lang: shell
+xp: 0 
+skills: 1
+key: 920d1887e3   
+```
+
 
 Shell variables are also used in **loops**,
 which repeat commands many times.
@@ -265,8 +302,8 @@ Also notice where the semi-colons go:
 the first one comes between the list and the keyword `do`,
 and the second comes between the body and the keyword `done`.
 
-*** =instructions
 
+`@instructions`
 Modify the loop so that it prints:
 
 ```
@@ -277,12 +314,32 @@ pdf
 
 Please use `suffix` as the name of the loop variable.
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+
+```{shell}
+
+```
+
+
+`@sample_code`
+
+```{shell}
+
+```
+
+
+`@solution`
+
 ```{shell}
 for suffix in docx odt pdf; do echo $suffix; done
 ```
 
-*** =sct
+
+`@sct`
+
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
@@ -294,8 +351,23 @@ Ex().multi(
 )
 ```
 
---- type:ConsoleExercise xp:100 key:8468b70a71
+
+`@possible_answers`
+
+
+`@feedback`
+
+
+---
+
 ## How can I repeat a command once for each file?
+
+```yaml
+type: ConsoleExercise 
+xp: 0 
+key: 8468b70a71   
+```
+
 
 You can always type in the names of the files you want to process when writing the loop,
 but it's usually better to use wildcards.
@@ -317,19 +389,39 @@ seasonal/winter.csv
 because the shell expands `seasonal/*.csv` to be a list of four filenames
 before it runs the loop.
 
-*** =instructions
 
+`@instructions`
 Modify the wildcard expression to `people/*`
 so that the loop prints the names of the files in the `people` directory
 regardless of what suffix they do or don't have.
 Please use `filename` as the name of your loop variable.
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+
+```{shell}
+
+```
+
+
+`@sample_code`
+
+```{shell}
+
+```
+
+
+`@solution`
+
 ```{bash}
 for filename in people/*; do echo $filename; done
 ```
 
-*** =sct
+
+`@sct`
+
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
@@ -341,8 +433,25 @@ Ex().multi(
 )
 ```
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:153ca10317
+
+`@possible_answers`
+
+
+`@feedback`
+
+
+---
+
 ## How can I record the names of a set of files?
+
+```yaml
+type: MultipleChoiceExercise 
+lang: shell
+xp: 50 
+skills: 1
+key: 153ca10317   
+```
+
 
 People often set a variable using a wildcard expression to record a list of filenames.
 For example,
@@ -370,20 +479,38 @@ files=seasonal/*.csv
 for f in $files; do echo $f; done
 ```
 
-*** =instructions
+
+`@instructions`
 - None: since `files` is defined on a separate line, it has no value in the second line.
 - One: the word "files".
 - Four: the names of all four seasonal data files.
 
-*** =hint
-
+`@hint`
 Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
 
-*** =pre_exercise_code
-```{python}
+`@pre_exercise_code`
+
+```{shell}
+
 ```
 
-*** =sct
+
+`@sample_code`
+
+```{shell}
+
+```
+
+
+`@solution`
+
+```{shell}
+
+```
+
+
+`@sct`
+
 ```{python}
 err1 = "No: you do not have to define a variable on the same line you use it."
 err2 = "No: this example defines and uses the variable `files` in the same shell."
@@ -391,8 +518,24 @@ correct3 = "Correct."
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
---- type:PureMultipleChoiceExercise lang:bash xp:50 key:4fcfb63c4f
+
+`@possible_answers`
+
+
+`@feedback`
+
+
+---
+
 ## A variable's name versus its value
+
+```yaml
+type: PureMultipleChoiceExercise 
+lang: bash
+xp: 50 
+key: 4fcfb63c4f   
+```
+
 
 A common mistake is to forget to use `$` before the name of a variable.
 When you do this,
@@ -428,22 +571,61 @@ for f in files; do echo $f; done
 
 (Read the first part of the loop carefully before answering.)
 
-*** =possible_answers
+
+`@instructions`
+
+
+`@hint`
+Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+
+`@pre_exercise_code`
+
+```{shell}
+
+```
+
+
+`@sample_code`
+
+```{shell}
+
+```
+
+
+`@solution`
+
+```{shell}
+
+```
+
+
+`@sct`
+
+```{shell}
+
+```
+
+
+`@possible_answers`
 - [One line: the word "files".]
 - Four lines: the names of all four seasonal data files.
 - Four blank lines: the variable `f` isn't assigned a value.
 
-*** =hint
-
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
-
-*** =feedback
+`@feedback`
 - Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
 - No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
 - No: the variable `f` is defined automatically by the `for` loop.
 
---- type:ConsoleExercise xp:100 key:39b5dcf81a
+---
+
 ## How can I run many commands in a single loop?
+
+```yaml
+type: ConsoleExercise 
+xp: 0 
+key: 39b5dcf81a   
+```
+
 
 Printing filenames is useful for debugging,
 but the real purpose of loops is to do things with multiple files.
@@ -456,8 +638,8 @@ for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 It has the same structure as the other loops you have already seen:
 all that's different is that its body is a pipeline of two commands instead of a single command.
 
-*** =instructions
 
+`@instructions`
 Write a loop that produces the same output as
 
 ```{shell}
@@ -468,12 +650,32 @@ but uses a loop to process each file separately.
 Please use `file` as the name of the loop variable,
 and remember that the `-h` flag used above tells `grep` *not* to print filenames in the output.
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+
+```{shell}
+
+```
+
+
+`@sample_code`
+
+```{shell}
+
+```
+
+
+`@solution`
+
 ```{bash}
 for file in seasonal/*.csv; do grep 2017-07 $file; done
 ```
 
-*** =sct
+
+`@sct`
+
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
@@ -484,8 +686,24 @@ Ex().multi(
 )
 ```
 
---- type:PureMultipleChoiceExercise lang:bash xp:50 key:b974b7f45a
+
+`@possible_answers`
+
+
+`@feedback`
+
+
+---
+
 ## Why shouldn't I use spaces in filenames?
+
+```yaml
+type: PureMultipleChoiceExercise 
+lang: bash
+xp: 50 
+key: b974b7f45a   
+```
+
 
 It's easy and sensible to give files multi-word names like `July 2017.csv`
 when you are using a graphical file explorer.
@@ -522,24 +740,65 @@ rm current.csv last year.csv
 
 what will happen:
 
-*** =possible_answers
+
+`@instructions`
+
+
+`@hint`
+What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+
+`@pre_exercise_code`
+
+```{shell}
+
+```
+
+
+`@sample_code`
+
+```{shell}
+
+```
+
+
+`@solution`
+
+```{shell}
+
+```
+
+
+`@sct`
+
+```{shell}
+
+```
+
+
+`@possible_answers`
 - The shell will print an error message because `last` and `year.csv` do not exist.
 - The shell will delete `current.csv`.
 - [Both of the above.]
 - Nothing.
 
-*** =hint
-
-What would you think was going to happen if someone showed you the command and you didn't know what files existed?
-
-*** =feedback
+`@feedback`
 - Yes, but that's not all.
 - Yes, but that's not all.
 - Correct.
 - Unfortunately not.
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:f6d0530991
+---
+
 ## How can I do many things in a single loop?
+
+```yaml
+type: MultipleChoiceExercise 
+lang: shell
+xp: 50 
+skills: 1
+key: f6d0530991   
+```
+
 
 The loops you have seen so far all have a single command or pipeline in their body,
 but a loop can contain any number of commands.
@@ -572,21 +831,39 @@ for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
 
 What will the shell do?
 
-*** =instructions
+
+`@instructions`
 - Print an error message.
 - Print one line for each of the four files.
 - Print one line for `autumn.csv` (the first file).
 - Print the last line of each file.
 
-*** =hint
-
+`@hint`
 You can pipe the output of `echo` to `tail`.
 
-*** =pre_exercise_code
-```{python}
+`@pre_exercise_code`
+
+```{shell}
+
 ```
 
-*** =sct
+
+`@sample_code`
+
+```{shell}
+
+```
+
+
+`@solution`
+
+```{shell}
+
+```
+
+
+`@sct`
+
 ```{python}
 err1 = "No: the loop will run, it just won't do something sensible."
 correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
@@ -594,3 +871,10 @@ err3 = "No: the loop runs one for each of the four filenames."
 err4 = "No: the input of `tail` is the output of `echo` for each filename."
 Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```
+
+
+`@possible_answers`
+
+
+`@feedback`
+
