@@ -2,7 +2,8 @@
 title: 'Manipulating files and directories'
 description: 'This chapter is a brief introduction to the Unix shell.  You''ll learn why it is still in use after almost fifty years, how it compares to the graphical tools you may be more familiar with, how to move around in the shell, and how to create, modify, and delete files and folders.'
 free_preview: true
-attachments: {}
+attachments:
+    slides_link: 'https://s3.amazonaws.com/assets.datacamp.com/development/course_5679/slides/chapter1.pdf'
 ---
 
 ## How does the shell compare to a desktop interface?
@@ -1226,3 +1227,16 @@ Ex().multi(
 Ex().success_msg("This concludes chapter 1 of the intro to Shell for Data Science course! Rush over to the next chapter to learn more about manipulating data!")
 
 ```
+
+---
+
+## Insert exercise title here
+
+```yaml
+type: VideoExercise
+key: ff86a7758f
+xp: 50
+```
+
+`@projector_key`
+e08b28d083144dbb3caeca222d3055a3
