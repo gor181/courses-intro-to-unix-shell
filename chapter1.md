@@ -1224,3 +1224,16 @@ Ex().multi(
 Ex().success_msg("This concludes chapter 1 of the intro to Shell for Data Science course! Rush over to the next chapter to learn more about manipulating data!")
 
 ```
+
+---
+
+## Insert exercise title here
+
+```yaml
+type: VideoExercise
+key: d5e2863177
+xp: 50
+```
+
+`@projector_key`
+5b3f749146bd85d97f0f22a4aaabd62f
